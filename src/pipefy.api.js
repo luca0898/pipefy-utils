@@ -13,3 +13,14 @@ export const allCards = async (pipeId) => {
         }
     })
 }
+
+export const deleteCard = async (cardId) => {
+    const data = `{"query":"mutation deleteCard($input: DeleteCardInput!) { deleteCard(input: $input) { success } } ","variables":{"input":{"id":"${cardId}"}},"operationName":"deleteCard"}`
+
+    return await pipefyApi.post('graphql', data, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.PIPEFY_AUTHORIZATION_TOKEN}`
+        }
+    })
+}

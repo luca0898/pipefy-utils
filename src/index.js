@@ -20,6 +20,11 @@ async function cleanPipe(pipeId) {
                 const { data } = await deleteCard(id)
                 const { success } = data.data.deleteCard
 
+                if (!data.data.deleteCard){
+                    console.log(`Card ${id} was not deleted`, JSON.stringify(data.data.deleteCard))
+                    break; // jump to next card
+                }
+
                 console.log(`Card ${id} delete ${success ? 'success' : 'fail'}`)
             }, 1000)
         }
@@ -29,4 +34,4 @@ async function cleanPipe(pipeId) {
     }
 }
 
-cleanPipe()
+cleanPipe('301716578')
